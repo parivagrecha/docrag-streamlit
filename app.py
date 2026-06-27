@@ -150,7 +150,7 @@ def retrieve_chunks(bm25_index, chunks, query, top_k=5):
     return [(chunks[idx], float(scores[idx])) for idx in ranked]
 
 
-# ─── Claude Generation ────────────────────────────────────────────────────────
+
 def generate_answer(api_key, doc_name, query, retrieved):
     """Call Claude Sonnet with retrieved chunks as grounded context."""
     context = '\n\n---\n\n'.join([
@@ -183,9 +183,7 @@ if "messages"    not in st.session_state: st.session_state.messages    = []
 if "active_doc"  not in st.session_state: st.session_state.active_doc  = None
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
 #  SIDEBAR
-# ═══════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
     st.markdown("## 🔍 DocRAG")
     st.caption("Chat with your documents — grounded answers, no hallucination")
@@ -224,7 +222,7 @@ with st.sidebar:
 
     if uploaded:
         if uploaded.name not in st.session_state.documents:
-            with st.spinner(f"Indexing "{uploaded.name}"…"):
+            with st.spinner(f'Indexing "{uploaded.name}"…'):
                 try:
                     text, num_pages = extract_text_from_pdf(uploaded)
                     if len(text.strip()) < 50:
@@ -288,9 +286,8 @@ with st.sidebar:
         )
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+
 #  MAIN CHAT AREA
-# ═══════════════════════════════════════════════════════════════════════════════
 st.markdown("# 🔍 DocRAG")
 
 if st.session_state.active_doc:
